@@ -53,7 +53,7 @@ const routes = [{
   name: '404',
   component: () => import('../views/404.vue')
 }, {
-  path: '/oauth/login/qq',
+  path: '/oauth/auth/qq',
   name: 'qqLogin',
   component: () => import('../components/OauthLogin.vue')
 }, {

@@ -2,7 +2,7 @@
   <div class="flex flex-row">
     <!-- 登录和设置按钮 -->
     <template v-if="userInfo === ''">
-      <a-button type="text" @click="openLoginDialog">{{ t('settings.login') }}</a-button>
+      <a-button type="text" @click="openLoginDialog">{{ t('settings.auth') }}</a-button>
       <a-button type="text" @click="openSettingDialog">设置</a-button>
     </template>
 

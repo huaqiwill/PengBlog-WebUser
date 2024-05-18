@@ -22,7 +22,7 @@ export default defineComponent({
     const userStore = useUserStore()
     const route = useRoute()
     const router = useRouter()
-    if (route.path === '/oauth/login/qq') {
+    if (route.path === '/oauth/auth/qq') {
       //@ts-ignore
       if (QC.Login.check()) {
         //@ts-ignore
