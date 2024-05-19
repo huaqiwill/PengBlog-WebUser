@@ -81,7 +81,7 @@ import { useCommonStore } from '@/stores/common'
 import { useUserStore } from '@/stores/user'
 import { useRoute } from 'vue-router'
 import api from '@/api/api'
-import config from '@/config/config'
+import config from '@/settings.ts'
 
 const proxy: any = getCurrentInstance()?.appContext.config.globalProperties
 const commonStore = useCommonStore()

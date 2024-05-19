@@ -16,7 +16,7 @@ import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { isExternal } from '@/utils/validate'
-import config from '@/config/config'
+import config from '@/settings.ts'
 import api from '@/api/api'
 import Logo from '@/components/Header/src/Logo.vue'
 
