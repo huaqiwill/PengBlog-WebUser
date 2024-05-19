@@ -1,5 +1,6 @@
 import axios from 'axios'
-import { app } from '@/main'
+// import { app } from '@/main'
+import { Notification } from '@arco-design/web-vue';
 
 /* 请求拦截器 */
 axios.interceptors.request.use((config: any) => {
@@ -12,18 +13,24 @@ axios.interceptors.response.use(
   (response) => {
     switch (response.data.code) {
       case 50000:
-        app.config.globalProperties.$notify({
-          title: 'Error',
-          message: '系统异常,请联系管理员',
-          type: 'error'
+        Notification.error({
+          content: '系统异常,请联系管理员~',
         })
+        // app.config.globalProperties.$notify({
+        //   title: 'Error',
+        //   message: '系统异常,请联系管理员',
+        //   type: 'error'
+        // })
         break
       case 40001:
-        app.config.globalProperties.$notify({
-          title: 'Error',
-          message: '用户未登录',
-          type: 'error'
+        Notification.error({
+          content: '用户未登录~',
         })
+        // app.config.globalProperties.$notify({
+        //   title: 'Error',
+        //   message: '用户未登录',
+        //   type: 'error'
+        // })
         break
     }
     return response
@@ -33,7 +40,6 @@ axios.interceptors.response.use(
   }
 )
 
-/* 接口列表 */
 export default {
   /* 获取推荐文章 */
   getTopAndFeaturedArticles: () => {

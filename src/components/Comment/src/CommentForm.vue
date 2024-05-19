@@ -31,12 +31,14 @@ import { useCommentStore } from '@/stores/comment'
 import { useAppStore } from '@/stores/app'
 import api from '@/api/api'
 import emitter from '@/utils/mitt'
+import { Notification } from '@arco-design/web-vue'
 
 export default defineComponent({
   name: 'CommentItem',
   components: { SubTitle },
   setup() {
     const proxy: any = getCurrentInstance()?.appContext.config.globalProperties
+
     const userStore = useUserStore()
     const commentStore = useCommentStore()
     const appStore = useAppStore()
@@ -46,19 +48,26 @@ export default defineComponent({
     })
     const saveComment = () => {
       if (userStore.userInfo === '') {
-        proxy.$notify({
-          title: 'Warning',
-          message: '请登录后评论',
-          type: 'warning'
+        Notification.warning({
+          content: '请登录后评论'
         })
+        // proxy.$notify({
+        //   title: 'Warning',
+        //   message: '请登录后评论',
+        //   type: 'warning'
+        // })
         return
       }
       if (reactiveData.commentContent.trim() == '') {
-        proxy.$notify({
-          title: 'Warning',
-          message: '评论不能为空',
-          type: 'warning'
+        Notification.warning({
+          content: '评论不能为空'
         })
+
+        // proxy.$notify({
+        //   title: 'Warning',
+        //   message: '评论不能为空',
+        //   type: 'warning'
+        // })
         return
       }
       const path = route.path
@@ -73,25 +82,34 @@ export default defineComponent({
           fetchComments()
           let isCommentReview = appStore.websiteConfig.isCommentReview
           if (isCommentReview) {
-            proxy.$notify({
-              title: 'Warning',
-              message: '评论成功,正在审核中',
-              type: 'warning'
+            Notification.info({
+              content: '评论成功,正在审核中'
             })
+            // proxy.$notify({
+            //   title: 'Warning',
+            //   message: '评论成功,正在审核中',
+            //   type: 'warning'
+            // })
           } else {
-            proxy.$notify({
-              title: 'Success',
-              message: '评论成功',
-              type: 'success'
+            Notification.success({
+              content: '评论成功'
             })
+            // proxy.$notify({
+            //   title: 'Success',
+            //   message: '评论成功',
+            //   type: 'success'
+            // })
           }
           reactiveData.commentContent = ''
         } else {
-          proxy.$notify({
-            title: 'Error',
-            message: data.message,
-            type: 'error'
+          Notification.error({
+            content: data.message
           })
+          // proxy.$notify({
+          //   title: 'Error',
+          //   message: data.message,
+          //   type: 'error'
+          // })
         }
       })
     }
