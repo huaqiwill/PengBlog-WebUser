@@ -2,10 +2,9 @@
   <div class="flex flex-row">
     <!-- 登录和设置按钮 -->
     <template v-if="userInfo === ''">
-      <a-button type="text" @click="openLoginDialog">{{ t('settings.auth') }}</a-button>
-      <a-button type="text" @click="openSettingDialog">设置</a-button>
+      <a-button type="text" @click="openLoginPage">登录</a-button>
+      <a-button type="text" @click="openRegisterPage">注册</a-button>
     </template>
-
     <!-- 头像及下拉菜单 -->
     <template v-if="userInfo !== ''">
       <a-dropdown trigger="hover">
@@ -109,8 +108,9 @@ const logout = () => {
   })
 }
 
-const openSettingDialog = () => {
-  settingDialogVisible.value = true
+const openRegisterPage = () => {
+  router.push('/auth/signup')
+  // settingDialogVisible.value = true
 }
 
 const openUserCenter = () => {
@@ -121,10 +121,10 @@ const handleOpenModel: any = (status: boolean) => {
   searchStore.setOpenModal(status)
 }
 
-const openLoginDialog = () => {
-  loginDialogVisible.value = true
+const openLoginPage = () => {
+  router.push('/auth/signin')
+  // loginDialogVisible.value = true
 }
-
 
 const userInfo = toRef(userStore.$state, 'userInfo')
 const isMobile = toRef(commonStore.$state, 'isMobile')

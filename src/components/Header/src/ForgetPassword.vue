@@ -25,13 +25,7 @@
 </template>
 
 <script lang="ts">
-import {
-  reactive,
-  defineComponent,
-  getCurrentInstance,
-  toRefs,
-  toRef
-} from 'vue'
+import { reactive, defineComponent, getCurrentInstance, toRefs, toRef } from 'vue'
 import { useCommonStore } from '@/stores/common'
 import { useUserStore } from '@/stores/user'
 import api from '@/api/api'

@@ -36,21 +36,23 @@ const accessArticle = () => {
     })
     return
   }
-  api.accessArticle({
-    articleId: articleId,
-    articlePassword: articlePassword
-  }).then(({ data }) => {
-    if (data.flag) {
-      articlePasswordDialogVisible.value = false
-      userStore.accessArticles.push(articleId)
-      router.push({ path: '/articles/' + articleId })
-    } else {
-      proxy.$notify({
-        title: 'Error',
-        message: data.message,
-        type: 'error'
-      })
-    }
-  })
+  api
+    .accessArticle({
+      articleId: articleId,
+      articlePassword: articlePassword
+    })
+    .then(({ data }) => {
+      if (data.flag) {
+        articlePasswordDialogVisible.value = false
+        userStore.accessArticles.push(articleId)
+        router.push({ path: '/articles/' + articleId })
+      } else {
+        proxy.$notify({
+          title: 'Error',
+          message: data.message,
+          type: 'error'
+        })
+      }
+    })
 }
 </script>
