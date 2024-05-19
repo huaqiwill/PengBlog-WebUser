@@ -9,9 +9,10 @@ const conn = new Client()
 
 conn.on('ready', () => {
   conn.exec('rm -rf /usr/local/aurora-vue/blog', (err, stream) => {
-    if (err) throw err
-    stream
-      .on('close', () => {
+    if (err){
+      throw err
+    }
+    stream.on('close', () => {
         spinner.start()
         client.scp(
           './dist/',
@@ -36,11 +37,9 @@ conn.on('ready', () => {
       .on('data', () => { })
       .stderr.on('data', () => { })
   })
-})
-  .on('error', async (err) => {
+}).on('error', async (err) => {
     console.log(chalk.red('Client 连接错误' + err.toString()))
-  })
-  .connect({
+  }).connect({
     host: process.env.VUE_APP_HOST,
     port: process.env.VUE_APP_PORT,
     username: process.env.VUE_APP_USERNAME,
