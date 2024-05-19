@@ -1,9 +1,14 @@
 export default {
+  // 默认主题
   theme: 'theme-light',
+  // QQ登录信息
   qqLogin: {
     QQ_APP_ID: '101999415',
     QQ_REDIRECT_URI: 'https://www.linhaojun.top/oauth/login/qq'
   },
+  // 默认网站标题
+  title: '网站标题',
+  // 默认路由
   routes: [
     {
       name: 'Home',
