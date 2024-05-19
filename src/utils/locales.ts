@@ -4,7 +4,7 @@ import cookies from 'js-cookie'
 function loadLocaleMessages(): {
   [key: string]: { [key: string]: { [key: string]: string } }
 } {
-  const locales = require.context('../locales/languages', true, /[A-Za-z0-9-_,\s]+\.json$/i)
+  const locales = require.context('@/assets/languages', true, /[A-Za-z0-9-_,\s]+\.json$/i)
   const messages: {
     [key: string]: { [key: string]: { [key: string]: string } }
   } = {}

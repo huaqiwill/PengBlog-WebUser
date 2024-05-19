@@ -74,12 +74,12 @@ const routes = [
   {
     path: '/auth/signin',
     name: '登录',
-    component: () => import('@/views/v2/home/Home.vue')
+    component: () => import('@/views/auth/signin.vue')
   },
   {
     path: '/auth/signup',
     name: '注册',
-    component: () => import('@/views/v2/home/Home.vue')
+    component: () => import('@/views/auth/signup.vue')
   },
   {
     path: '/v2/home',
