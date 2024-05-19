@@ -1,8 +1,8 @@
 import { createApp } from 'vue'
-import { i18n } from '@/utils/locales'
+import { i18n } from '@/assets/locales'
 import { createPinia } from 'pinia'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
-import { registerSvgIcon } from '@/utils/svgicons'
+import { registerSvgIcon } from '@/assets/icons'
 import { registerObSkeleton } from '@/components/LoadingSkeleton'
 import { components, plugins } from '@/utils/element-plus'
 import App from './App.vue'
@@ -19,7 +19,7 @@ import '@arco-design/web-vue/dist/arco.css'
 
 import api from '@/api/api'
 import '@/router/guard'
-import '@/styles/index.scss'
+import '@/assets/styles/index.scss'
 import 'normalize.css/normalize.css'
 import 'prismjs/themes/prism.css'
 import 'prismjs'
@@ -37,8 +37,8 @@ const app = createApp(App)
   .use(infiniteScroll)
   .use(v3ImgPreview, {})
   .use(lazyPlugin, {
-    loading: require('@/assets/default-cover.jpg'),
-    error: require('@/assets/default-cover.jpg')
+    loading: require('@/assets/images/default-cover.jpg'),
+    error: require('@/assets/images/default-cover.jpg')
   })
 
 

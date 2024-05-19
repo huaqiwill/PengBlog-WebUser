@@ -64,7 +64,7 @@ const theme = computed(() => appStore.themeConfig.theme)
 //
 const headerImage = computed(() => {
   return {
-    backgroundImage: `url(${commonStore.headerImage}), url(${require('@/assets/default-cover.jpg')})`,
+    backgroundImage: `url(${commonStore.headerImage}), url(${require('@/assets/images/default-cover.jpg')})`,
     opacity: commonStore.headerImage !== '' ? 1 : 0
   }
 })
