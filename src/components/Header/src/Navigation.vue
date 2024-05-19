@@ -1,14 +1,8 @@
 <template>
   <div class="menu-demo">
-    <a-menu mode="horizontal" :default-selected-keys="['1']">
-      <a-menu-item key="0" :style="{ padding: 0, marginRight: '38px' }" disabled>
-        <div
-          :style="{
-            borderRadius: '2px',
-            cursor: 'text'
-          }">
-          <Logo />
-        </div>
+    <a-menu mode="horizontal" :default-selected-keys="defaultSelectKeys">
+      <a-menu-item key="0" class="nav-item" disabled>
+        <Logo />
       </a-menu-item>
       <a-menu-item v-for="(route, index) in routes" :key="index" @click="pushPage(route.path)"
         >{{ route.i18n.cn }}
@@ -18,7 +12,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive } from 'vue'
+import { onMounted, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { isExternal } from '@/utils/validate'
@@ -29,6 +23,8 @@ import Logo from '@/components/Header/src/Logo.vue'
 const { t } = useI18n()
 const router = useRouter()
 const routes = config.routes
+
+const defaultSelectKeys = ref(['1'])
 
 //
 const reactiveData = reactive({
@@ -42,7 +38,7 @@ onMounted(() => {
   })
 })
 
-//
+// 跳转到指定页面
 const pushPage = (path: string): void => {
   if (!path) return
   if (isExternal(path)) {
@@ -61,6 +57,10 @@ const openPhotoAlbum = (id: any): void => {
 </script>
 
 <style lang="scss" scoped>
+.nav-item {
+  padding: 0;
+  margin-right: 38px;
+}
 .menu-demo {
   box-sizing: border-box;
   width: 100%;
