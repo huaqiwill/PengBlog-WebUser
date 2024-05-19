@@ -5,27 +5,24 @@ export default {
     QQ_REDIRECT_URI: 'https://www.linhaojun.top/oauth/login/qq'
   },
   routes: [
-    /* 首页 */
     {
       name: 'Home',
       path: '/',
       i18n: {
-        cn: '博客1',
+        cn: '博客',
         en: 'Home'
       },
       children: []
     },
-    /* 说说 */
     {
       name: 'Talks',
       path: '/talks',
       i18n: {
-        cn: '说说2',
+        cn: '说说',
         en: 'talks'
       },
       children: []
     },
-    /* 相册 */
     {
       name: 'Album',
       path: '/albums',
