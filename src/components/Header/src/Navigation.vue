@@ -10,9 +10,8 @@
           <Logo />
         </div>
       </a-menu-item>
-      <a-menu-item v-for="route in routes" :key="route.path" @click="pushPage(route.path)">{{
-          route.i18n.cn
-        }}
+      <a-menu-item v-for="(route, index) in routes" :key="index" @click="pushPage(route.path)"
+        >{{ route.i18n.cn }}
       </a-menu-item>
     </a-menu>
   </div>

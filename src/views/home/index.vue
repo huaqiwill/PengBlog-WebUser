@@ -16,7 +16,7 @@
       <!-- 标签目录 -->
       <TagBox />
     </Sidebar>
-    <a-tabs default-active-key="2">
+    <a-tabs default-active-key="1">
       <a-tab-pane :title="category.categoryName + ' * ' + category.articleCount" v-for="category in categories"
                   :key="category.id"
                   :class="{ active: activeTab === category.id }">

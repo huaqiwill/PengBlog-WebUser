@@ -35,7 +35,7 @@ axios.interceptors.response.use(
 
 /* 接口列表 */
 export default {
-  /*  */
+  /* 获取推荐文章 */
   getTopAndFeaturedArticles: () => {
     return axios.get('/api/articles/topAndFeatured')
   },
@@ -71,7 +71,7 @@ export default {
   getAllArchives: (params: any) => {
     return axios.get('/api/archives/all', { params: params })
   },
-  /*  */
+  /* 登录  */
   login: (params: any) => {
     return axios.post('/api/users/login', params)
   },
