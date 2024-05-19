@@ -9,7 +9,7 @@ const routes = [
   {
     path: '/articles/:articleId',
     name: 'Articles',
-    component: () => import('@/views/Article.vue')
+    component: () => import('@/views/article/article.vue')
   },
   {
     path: '/talks',
@@ -29,12 +29,12 @@ const routes = [
   {
     path: '/article-list/:tagId',
     name: 'ArticleList',
-    component: () => import('@/views/ArticleList.vue')
+    component: () => import('@/views/article/index.vue')
   },
   {
     path: '/tags',
     name: 'Tags',
-    component: () => import('@/views/Tags.vue')
+    component: () => import('@/views/article/tags.vue')
   },
   {
     path: '/albums',

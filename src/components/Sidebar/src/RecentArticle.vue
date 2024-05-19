@@ -2,14 +2,18 @@
   <a-list class="mb-4">
     <template #header>
       <SubTitle title="最新文章" icon="quote" />
+      <!-- <icon-plus :style="{ fontSize: '32px' }" />
+      <span :class="titleClass">最新文章</span> -->
     </template>
-    <a-list-item v-for="article in articles" :key="article.id" @click="toArticle(article)">
-      {{ article.articleTitle }}
+    <a-list-item class="list-item" v-for="article in articles" :key="article.id" @click="toArticle(article)">
+      <a-link :href="pathName(article)">{{ article.articleTitle }}</a-link>
     </a-list-item>
   </a-list>
 </template>
 
 <script lang="ts" setup>
+// 最新文章
+
 import { onMounted, ref, toRef } from 'vue'
 import { SubTitle } from '@/components/Title'
 import { useCommentStore } from '@/stores/comment'
@@ -38,30 +42,38 @@ const comments = toRef(commentStore.$state, 'recentComment')
 const defaultSrc = 'https://static.linhaojun.top/aurora/config/0af1901da1e64dfb99bb61db21e716c4.jpeg'
 const articles = ref([])
 
-
 const toArticle = (article: any) => {
   router.push({ path: '/articles/' + article.id })
 }
 
+const pathName = (article: any) => {
+  return '/articles/' + article.id
+}
+
 const fetchArticles = () => {
-  api.getArticles({
-    current: 1,
-    size: 10
-  }).then(({ data }) => {
-    if (data.flag) {
-      data.data.records.forEach((item: any) => {
-        item.articleContent = markdownToHtml(item.articleContent)
-          .replace(/<\/?[^>]*>/g, '')
-          .replace(/[|]*\n/, '')
-          .replace(/&npsp;/gi, '')
-      })
-      articles.value = data.data.records
-    }
-  })
+  api
+    .getArticles({
+      current: 1,
+      size: 10
+    })
+    .then(({ data }) => {
+      if (data.flag) {
+        data.data.records.forEach((item: any) => {
+          item.articleContent = markdownToHtml(item.articleContent)
+            .replace(/<\/?[^>]*>/g, '')
+            .replace(/[|]*\n/, '')
+            .replace(/&npsp;/gi, '')
+        })
+        articles.value = data.data.records
+      }
+    })
 }
 </script>
 
 <style lang="scss" scoped>
+.arco-list-item {
+  padding: 4px 10px !important;
+}
 .comment {
   width: 70%;
 }

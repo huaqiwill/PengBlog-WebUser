@@ -11,8 +11,12 @@ import VueClickAway from 'vue3-click-away'
 import lazyPlugin from 'vue3-lazy'
 import infiniteScroll from 'vue3-infinite-scroll-better'
 import v3ImgPreview from 'v3-img-preview'
+
+// arco.design
 import ArcoVue from '@arco-design/web-vue'
+import ArcoVueIcon from '@arco-design/web-vue/es/icon';
 import '@arco-design/web-vue/dist/arco.css'
+
 import api from '@/api/api'
 import '@/router/guard'
 import '@/styles/index.scss'
@@ -25,7 +29,7 @@ import 'mavon-editor/dist/css/index.css'
 const pinia = createPinia()
 pinia.use(piniaPluginPersistedstate)
 
-export const app = createApp(App)
+const app = createApp(App)
   .use(router)
   .use(pinia)
   .use(i18n)
@@ -36,6 +40,7 @@ export const app = createApp(App)
     loading: require('@/assets/default-cover.jpg'),
     error: require('@/assets/default-cover.jpg')
   })
+
 
 /* 组件 */
 components.forEach((component) => {
@@ -50,6 +55,9 @@ plugins.forEach((plugin) => {
 registerSvgIcon(app)
 registerObSkeleton(app)
 
+app.use(ArcoVueIcon)
 app.use(ArcoVue)
 app.mount('#app')
 api.report()
+
+export default app;

@@ -16,21 +16,12 @@
       <!-- 标签目录 -->
       <TagBox />
     </Sidebar>
-    <a-tabs default-active-key="1">
-      <a-tab-pane :title="category.categoryName + ' * ' + category.articleCount" v-for="category in categories"
-                  :key="category.id"
-                  :class="{ active: activeTab === category.id }">
+    <a-tabs default-active-key="0">
+      <a-tab-pane v-for="(category, index) in categories" :title="category.categoryName" :key="index">
         <ul class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-1 gap-8">
-          <template v-if="haveArticles === true">
-            <li v-for="article in articles" :key="article.id">
-              <ArticleCard class="home-article" :data="article" />
-            </li>
-          </template>
-          <template v-else>
-            <li v-for="n in 12" :key="n">
-              <ArticleCard :data="{}" />
-            </li>
-          </template>
+          <li v-for="(article, index) in articles" :key="index">
+            <ArticleCard class="home-article" :data="article" />
+          </li>
         </ul>
       </a-tab-pane>
     </a-tabs>
@@ -65,6 +56,13 @@ import { useI18n } from 'vue-i18n'
 import api from '@/api/api'
 import markdownToHtml from '@/utils/markdown'
 
+// 定义 Category 对象的属性
+interface Category {
+  id: number
+  categoryName: string
+  articleCount: number
+}
+
 const appStore = useAppStore()
 const userStore = useUserStore()
 const articleStore = useArticleStore()
@@ -98,6 +96,7 @@ onMounted(() => {
   fetchArticles()
   const articleListEl = document.getElementById('article-list')
   articleOffset.value = articleListEl && articleListEl instanceof HTMLElement ? articleListEl.offsetTop + 120 : 0
+  
 })
 
 const fetchTopAndFeatured = () => {
@@ -117,7 +116,7 @@ const fetchTopAndFeatured = () => {
   })
 }
 
-const articles = ref([])
+const articles: Ref<Category[]> = ref([])
 
 const fetchArticles = () => {
   activeTab.value = userStore.tab
@@ -125,28 +124,29 @@ const fetchArticles = () => {
   pagination.current = userStore.page
   if (userStore.tab === 0) {
     haveArticles.value = false
-    api.getArticles({
-      current: pagination.current,
-      size: pagination.size
-    }).then(({ data }) => {
-      if (data.flag) {
-        data.data.records.forEach((item: any) => {
-          item.articleContent = markdownToHtml(item.articleContent)
-            .replace(/<\/?[^>]*>/g, '')
-            .replace(/[|]*\n/, '')
-            .replace(/&npsp;/gi, '')
-        })
-        articleStore.articles = data.data.records
-        pagination.total = data.data.count
-        haveArticles.value = true
-        articles.value = articleStore.articles
-      }
-    })
+    api
+      .getArticles({
+        current: pagination.current,
+        size: pagination.size
+      })
+      .then(({ data }) => {
+        if (data.flag) {
+          data.data.records.forEach((item: any) => {
+            item.articleContent = markdownToHtml(item.articleContent)
+              .replace(/<\/?[^>]*>/g, '')
+              .replace(/[|]*\n/, '')
+              .replace(/&npsp;/gi, '')
+          })
+          articleStore.articles = data.data.records
+          pagination.total = data.data.count
+          haveArticles.value = true
+          articles.value = articleStore.articles
+        }
+      })
   } else {
     fetchArticlesByCategoryId(userStore.tab)
   }
 }
-
 
 const fetchArticlesByCategoryId = (categoryId: any) => {
   haveArticles.value = false
@@ -228,15 +228,7 @@ const gradientBackground = computed(() => {
 })
 const themeConfig = computed(() => appStore.themeConfig)
 
-interface Category {
-  // 定义 Category 对象的属性
-  id: Number,
-  categoryName: String,
-  articleCount: Number
-}
-
 const categories: Ref<Category[]> = toRef(categoryStore.$state, 'categories')
-
 </script>
 
 <style lang="scss">

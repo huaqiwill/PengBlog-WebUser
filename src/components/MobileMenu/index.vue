@@ -96,7 +96,7 @@ import { useI18n } from 'vue-i18n'
 import { useRouter } from 'vue-router'
 import { useNavigatorStore } from '@/stores/navigator'
 import Social from '@/components/Social.vue'
-import config from '@/settings.ts'
+import config from '@/settings'
 import api from '@/api/api'
 
 export default defineComponent({
