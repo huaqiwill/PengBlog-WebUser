@@ -55,13 +55,14 @@ import { useCategoryStore } from '@/stores/category'
 import { useI18n } from 'vue-i18n'
 import api from '@/api/api'
 import markdownToHtml from '@/utils/markdown'
+import { Article, Category } from '@/types'
 
 // 定义 Category 对象的属性
-interface Category {
-  id: number
-  categoryName: string
-  articleCount: number
-}
+// interface Category {
+//   id: number
+//   categoryName: string
+//   articleCount: number
+// }
 
 const appStore = useAppStore()
 const userStore = useUserStore()
@@ -96,7 +97,6 @@ onMounted(() => {
   fetchArticles()
   const articleListEl = document.getElementById('article-list')
   articleOffset.value = articleListEl && articleListEl instanceof HTMLElement ? articleListEl.offsetTop + 120 : 0
-  
 })
 
 const fetchTopAndFeatured = () => {
@@ -116,7 +116,7 @@ const fetchTopAndFeatured = () => {
   })
 }
 
-const articles: Ref<Category[]> = ref([])
+const articles: Ref<Article[]> = ref([])
 
 const fetchArticles = () => {
   activeTab.value = userStore.tab

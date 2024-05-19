@@ -1,20 +1,20 @@
 <template>
   <a-card hoverable class="ww-full h-48 p-2">
     <!-- 是否为置顶 -->
-    <!-- <span v-if="article.isTop" class="article-tag">
+    <span v-if="article.isTop" class="article-tag">
       <b>
         <svg-icon icon-class="pin" />
         {{ t('settings.pinned') }}
       </b>
-    </span> -->
+    </span>
 
     <!-- 是否为推荐文章 -->
-    <!-- <span v-else-if="article.isFeatured" class="article-tag">
+    <span v-else-if="article.isFeatured" class="article-tag">
       <b>
         <svg-icon icon-class="hot" />
         {{ t('settings.featured') }}
       </b>
-    </span> -->
+    </span>
 
     <!-- 文章内容 -->
     <div class="flex flex-row flex-nowrap items-center">
@@ -47,19 +47,28 @@
           </ul>
         </span> -->
 
-        <h2 v-if="article.articleTitle" @click="toArticle" class="text-xl mb-2 text-black" data-dia="article-link">
+        <a-typography>
+          <a-typography-title :heading="5" @click="toArticle" class="cursor-pointer">
+            {{ article.articleTitle }}
+          </a-typography-title>
+          <a-typography-paragraph class="text-gray-600 text-ellipsis overflow-hidden h-16 leading-normal">
+            {{ article.articleContent }}
+          </a-typography-paragraph>
+        </a-typography>
+
+        <!-- <h2 v-if="article.articleTitle" @click="toArticle" class="text-xl mb-2 text-black" data-dia="article-link">
           <a>
             <span> {{ article.articleTitle }}</span>
             <svg-icon v-if="article.status == 2" icon-class="lock" class="lock-svg" />
           </a>
-        </h2>
+        </h2> -->
 
-        <p
+        <!-- <p
           @click="toArticle"
           class="text-gray-600 text-ellipsis overflow-hidden h-16 leading-normal"
           v-if="article.articleContent">
           {{ article.articleContent }}
-        </p>
+        </p> -->
 
         <div v-if="article.author && article.createTime">
           <div class="mt-4 flex flex-row items-center justify-end">
