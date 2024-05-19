@@ -1,10 +1,10 @@
 <template>
   <div class="menu-demo">
-    <a-menu mode="horizontal" :default-selected-keys="defaultSelectKeys">
-      <a-menu-item key="0" class="nav-item" disabled>
+    <a-menu mode="horizontal" :default-selected-keys="[1]">
+      <a-menu-item key="menu" class="nav-item" disabled>
         <Logo />
       </a-menu-item>
-      <a-menu-item v-for="(route, index) in routes" :key="index" @click="pushPage(route.path)"
+      <a-menu-item v-for="(route, index) in routes" :key="index + 1" @click="pushPage(route.path)"
         >{{ route.i18n.cn }}
       </a-menu-item>
     </a-menu>
@@ -23,8 +23,6 @@ import Logo from '@/components/Header/src/Logo.vue'
 const { t } = useI18n()
 const router = useRouter()
 const routes = config.routes
-
-const defaultSelectKeys = ref(['1'])
 
 //
 const reactiveData = reactive({
